@@ -1,0 +1,49 @@
+tr:
+  hello: "Hello world"
+
+  g:
+    isms: BGYS
+    gdpr: KVKK
+    qms: KYS
+    pims: PIMS
+
+  activerecord:
+    models:
+      performance_indicator:
+        one: Performans Göstergesi
+        other: Performans Göstergeleri
+
+    attributes:
+      performance_indicator:
+        name: Adı
+        description: Açıklama
+        measured_method: Ölcüm Yöntemi
+        business_process_id: İş Süreci
+        department_ids: Departmanlar
+        responsible_id: Sorumlu
+        measured_methods:
+          manuel: El ile
+        value_parameter:
+          Hedef Değer Parametresi
+        value_parameters:
+          equal: Eşittir (=)
+          greater: Büyüktür (>)
+          less: Kücüktür (<)
+          greater_than: Büyük Eşittir (>=)
+          less_than: Kücük Eşittir (<=)
+        targeted_value: Hedeflenen Değer
+        indicator_status: Durum
+        indicator_statuses:
+          happened: Gerçekleşti
+          nothappened: Gerçekleşmedi
+          notmeasured: Henüz Ölçülmedi
+        last_measured_value: Son Ölçülen Değer
+        measurement_criteria: Ölçüm Yöntemi
+        measurement_criterias:
+          target_date: Tarih
+          value: Değer
+      style:
+      performance_measurement:
+        measured_value: Ölçülen Değer
+        measurement_date: Ölçüm Tarihi
+

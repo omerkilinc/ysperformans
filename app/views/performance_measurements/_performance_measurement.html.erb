@@ -1,0 +1,21 @@
+<%= content_tag :tr, id: dom_id(performance_measurement) do %>
+  <td><%= performance_measurement.try(:id) %></td>
+  <td><%= performance_measurement.try(:name) %></td>
+  <td><%= performance_measurement.try(:description) %></td>
+  <td class="text-end">
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+      <%= link_to "<i class='bi bi-eye'></i>".html_safe, performance_indicator_performance_measurement_path(performance_measurement),
+                  class: "btn btn-outline-secondary"
+      %>
+      <%= link_to "<i class='bi bi-pencil'></i>".html_safe, edit_performance_indicator_performance_measurement_path(performance_measurement),
+                  class: "btn btn-outline-secondary",
+                  format: :turbo_stream,
+                  data: { turbo_frame: "modal1" }
+      %>
+      <%= link_to "<i class='bi bi-trash'></i>".html_safe, performance_indicator_performance_measurement_path(performance_measurement),
+                  class: "btn btn-outline-secondary",
+                  data: { turbo_method: :delete, turbo_confirm: "#{performance_measurement.try(:name)} will be deleted !!!" }
+      %>
+    </div>
+  </td>
+<% end %>

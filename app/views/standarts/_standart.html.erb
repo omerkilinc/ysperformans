@@ -1,0 +1,23 @@
+<%= content_tag :tr, id: dom_id(standart) do %>
+  <td><%= standart.try(:id) %></td>
+  <td><%= standart.try(:name) %></td>
+  <td><%= standart.try(:description) %></td>
+  <td class="text-end">
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+      <%= link_to "<i class='bi bi-eye'></i>".html_safe, standart_path(standart),
+                  class: "btn btn-outline-secondary",
+                  format: :turbo_stream,
+                  data: { turbo_frame: "modal1" }
+      %>
+      <%= link_to "<i class='bi bi-pencil'></i>".html_safe, edit_standart_path(standart),
+                  class: "btn btn-outline-secondary",
+                  format: :turbo_stream,
+                  data: { turbo_frame: "modal1" }
+      %>
+      <%= link_to "<i class='bi bi-trash'></i>".html_safe, standart_path(standart),
+                  class: "btn btn-outline-secondary",
+                  data: { turbo_method: :delete, turbo_confirm: "#{standart.try(:name)} will be deleted !!!" }
+      %>
+    </div>
+  </td>
+<% end %>

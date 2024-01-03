@@ -1,0 +1,106 @@
+<div class="row mb-3">
+  <div class="col">
+    <div class="card">
+      <div class="card-header">
+        Performans Gostergesi
+      </div>
+      <div class="card-body">
+        <div class="card">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><%= PerformanceIndicator.t_attr('standart_id') %>: <b><%= I18n.t("g.#{@performance_indicator.standart&.name}") %></b></li>
+            <li class="list-group-item"><%= PerformanceIndicator.t_attr('business_process_id') %>: <b><%= @performance_indicator.business_process&.name %></b></li>
+            <li class="list-group-item"><%= PerformanceIndicator.t_attr('name') %>: <b><%= @performance_indicator.try(:name) %></b></li>
+            <li class="list-group-item"><%= PerformanceIndicator.t_attr('measured_method') %>: <b><%= I18n.t("activerecord.attributes.performance_indicator.measured_methods.#{@performance_indicator.measured_method}") %></b></li>
+            <li class="list-group-item"><%= PerformanceIndicator.t_attr('responsible_id') %>: <b><%= @performance_indicator.responsible&.name %></b></li>
+            <li class="list-group-item"><%= PerformanceIndicator.t_attr('targeted_value') %>: <b> <%= I18n.t("activerecord.attributes.performance_indicator.value_parameters.#{@performance_indicator.value_parameter}") %> <%= @performance_indicator.targeted_value %> </b></li>
+            <li class="list-group-item"><%= PerformanceIndicator.t_attr('last_measured_value') %>: <b>
+              <% if @performance_indicator.try(:last_measured_value) == "not_measured_yet" %>
+                <span class="badge text-bg-danger">Henüz Ölçülmedi</span>
+              <% else %>
+                <%= @performance_indicator.try(:last_measured_value) %>
+              <% end %>
+            </b></li>
+            <li class="list-group-item"><%= PerformanceIndicator.t_attr('description') %>: <b><%= @performance_indicator.try(:description) %></b></li>
+            <li class="list-group-item"><%= PerformanceIndicator.t_attr('indicator_status') %>: <b>
+
+              <% case (@performance_indicator.indicator_status)
+                 when "happened" %>
+                <span class="badge text-bg-success">Gerçekleşti</span>
+              <% when "nothappened" %>
+                <span class="badge text-bg-warning">Henüz Ölçülmedi</span>
+              <% when "notmeasured" %>
+                <span class="badge text-bg-danger">Gerçekleşmedi</span>
+              <% else %>
+                <span class="badge text-bg-info"><%= @performance_indicator.indicator_status %></span>
+              <% end %>
+
+            </b></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col">
+    <a href="<%= new_performance_indicator_performance_measurement_path(@performance_indicator) %>"
+       class="btn btn-outline-success mt-2"
+       data-turbo-frame="modal1">
+      <i class='bi bi-plus-lg'></i> Yeni Ölçüm
+    </a>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="card">
+    <div class="card-header">
+      Performans Ölçümleri
+    </div>
+    <div class="card-body">
+      <div class="card">
+        <%= search_form_for @search, url: performance_indicator_performance_measurements_path(@performance_indicator), method: :get do |f| %>
+          <table class="table table-striped table-hover table-responsive">
+            <thead>
+            <tr>
+              <th><%= sort_link @search, :id, 'Id', {}, { remote: true, method: :get } %></th>
+              <th><%= sort_link @search, :name, "Ölçülen Değer", {}, { remote: true, method: :get } %></th>
+              <th><%= sort_link @search, :description, "Tarih", {}, { remote: true, method: :get } %></th>
+              <th class="text-end">Aksiyonlar</th>
+            </tr>
+            </thead>
+            <tbody id="performance_measurements">
+              <% @performance_indicator.performance_measurements.each do |p| %>
+              <%= content_tag :tr, id: dom_id(p) do %>
+                <td><%= p.try(:id) %></td>
+                <td><%= p.try(:measured_value) %></td>
+                <td><%= p.measurement_date&.strftime("%d.%m.%Y") %></td>
+                <td class="text-end">
+                  <div class="btn-group" role="group" aria-label="Basic outlined example">
+                    <%= link_to "<i class='bi bi-eye'></i>".html_safe, performance_indicator_performance_measurement_path(@performance_indicator,p),
+                                class: "btn btn-outline-secondary",
+                                format: :turbo_stream,
+                                data: { turbo_frame: "modal1" }
+                    %>
+                    <%= link_to "<i class='bi bi-pencil'></i>".html_safe, edit_performance_indicator_performance_measurement_path(@performance_indicator,p),
+                                class: "btn btn-outline-secondary",
+                                format: :turbo_stream,
+                                data: { turbo_frame: "modal1" }
+                    %>
+                    <%= link_to "<i class='bi bi-trash'></i>".html_safe, performance_indicator_performance_measurement_path(@performance_indicator,p),
+                                class: "btn btn-outline-secondary",
+                                data: { turbo_method: :delete, turbo_confirm: "#{p.try(:name)} will be deleted !!!" }
+                    %>
+                  </div>
+                </td>
+              <% end %>
+              <% end %>
+            </tbody>
+          </table>
+          <%== render partial: "shared/pagy_nav", locals: { pagy: @pagy } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

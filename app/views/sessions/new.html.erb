@@ -1,0 +1,39 @@
+<% if notice.present? %>
+  <div class="row mb-3">
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
+  </div>
+<% elsif alert.present? %>
+  <div class="row mb-3">
+    <div class="alert alert-danger" role="alert">
+      <%= alert %>
+    </div>
+  </div>
+<% end %>
+
+
+<%= form_tag login_path do |form| %>
+
+  <h1 class="h3 mb-3 fw-normal">Lutfen Giris Yapiniz</h1>
+
+  <div class="form-floating mb-3">
+    <%= text_field_tag :username, nil, class: "form-control", html: {
+      placeholder: "name@example.com",
+      autocomplete: false
+    } %>
+    <%= label_tag :username, "Username" %>
+  </div>
+
+  <div class="form-floating mb-3">
+    <%= password_field_tag :password, nil, class: "form-control", html: {
+      placeholder: "Password", autocomplete: false
+    } %>
+
+    <%= label_tag :password, "Password" %>
+  </div>
+
+
+  <%= submit_tag "Giris", class: "w-100 btn btn-lg btn-primary" %>
+  <p class="mt-5 mb-3 text-muted">&copy; <%= Date.today.year %></p>
+<% end %>

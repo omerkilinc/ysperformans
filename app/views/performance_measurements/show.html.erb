@@ -1,0 +1,18 @@
+<%= render "shared/modal1", title: "Ölçüm" do %>
+  <div class="card" style="">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item d-flex">
+        <div class="col-4">ID:</div>
+        <div class="col-8"><%= @performance_measurement.id %></div>
+      </li>
+      <li class="list-group-item d-flex">
+        <div class="col-4">Ölçülen Değer:</div>
+        <div class="col-8"><%= @performance_measurement.try(:measured_value) %></div>
+      </li>
+      <li class="list-group-item d-flex">
+        <div class="col-4">Ölçüm Tarihi:</div>
+        <div class="col-8"><%= @performance_measurement.measurement_date&.strftime("%d.%m.%Y") %></div>
+      </li>
+    </ul>
+  </div>
+<% end %>

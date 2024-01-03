@@ -1,0 +1,34 @@
+<%= form_for [@performance_indicator, @performance_measurement], data: { controller: "form", "form-target": "form" } do |f| %>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :performance_indicator_id, value: @performance_indicator.id %>
+
+  <div class="row mb-3">
+    <div class="col">
+      <%= f.label :measured_value, class: "form-label" %>
+      <%= f.number_field :measured_value, class: "form-control" %>
+      <%= errors_for @performance_measurement, :measured_value %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <%= f.label :measurement_date, class: "form-label" %>
+      <%= f.date_field :measurement_date, class: "form-control" %>
+      <%= errors_for @performance_measurement, :measurement_date %>
+    </div>
+  </div>
+
+
+  <br>
+  <br>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Iptal</button>
+    <%= f.button class: "btn btn-primary" do %>
+      <span class="show-when-enabled">Kaydet</span>
+      <span class="show-when-disabled"><%= btn_disabled_animation %></span>
+    <% end %>
+  </div>
+
+<% end %>

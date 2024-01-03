@@ -1,0 +1,18 @@
+<%= render "shared/modal1", title: "Is Sureci" do %>
+  <div class="card" style="">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item d-flex">
+        <div class="col-4">ID:</div>
+        <div class="col-8"><%= @business_process.id %></div>
+      </li>
+      <li class="list-group-item d-flex">
+        <div class="col-4">Adi:</div>
+        <div class="col-8"><%= @business_process.try(:name) %></div>
+      </li>
+      <li class="list-group-item d-flex">
+        <div class="col-4">Aciklama:</div>
+        <div class="col-8"><%= @business_process.try(:description) %></div>
+      </li>
+    </ul>
+  </div>
+<% end %>

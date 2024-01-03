@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <title>Performans</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+</head>
+
+<body>
+
+<%= render "shared/header_nav" %>
+
+<%= render "shared/sidebar" %>
+
+<div class="container-fluid sub-header">
+  <header class="d-flex justify-content-start py-30">
+    <ul class="nav nav-pills">
+      <!--      <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>-->
+      <!--      <li class="nav-item"><a href="#" class="nav-link">Features</a></li>-->
+      <!--      <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>-->
+      <!--      <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>-->
+      <!--      <li class="nav-item"><a href="#" class="nav-link">About</a></li>-->
+    </ul>
+  </header>
+</div>
+
+<main class="mt-1 pt-3">
+  <div class="container-fluid">
+
+    <%= yield %>
+
+    <div class="row">
+      <div class="col">
+        <%#= toastr_flash %>
+      </div>
+    </div>
+
+
+  </div>
+
+</main>
+
+<%= turbo_frame_tag "modal1", target: "_top" %>
+
+
+<div class="container">
+  <footer class="py-3 my-4">
+    <p class="text-center ">© <%= Date.today.year %> Performans</p>
+  </footer>
+</div>
+
+</body>
+</html>

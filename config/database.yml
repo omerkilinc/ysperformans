@@ -1,0 +1,21 @@
+default: &default
+  adapter: <%= ENV["DB_ADAPTER"] %>
+  encoding: <%= ENV["DB_ENCODING"] %>
+  host: <%= ENV["DB_HOST"] %>
+  port: <%= ENV["DB_PORT"] %>
+  database: <%= ENV["DB_NAME"] %>
+  username: <%= ENV["DB_USER"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+  pool: <%= ENV['RAILS_MAX_THREADS'] %>
+
+development:
+  <<: *default
+  database: <%= "#{ENV["DB_NAME"]}_development" %>
+
+test:
+  <<: *default
+  database: <%= "#{ENV["DB_NAME"]}_test" %>
+
+production:
+  <<: *default
+  database: <%= ENV["DB_NAME"] %>

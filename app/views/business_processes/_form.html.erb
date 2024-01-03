@@ -1,0 +1,30 @@
+<%= form_for @business_process, data: { controller: "form", "form-target": "form" } do |f| %>
+
+  <div class="row mb-3">
+    <div class="col">
+      <%= f.label :name, class: "required form-label" %>
+      <%= f.text_field :name, class: "form-control" %>
+      <%= errors_for @business_process, :name %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <%= f.label :description, class: "form-label" %>
+      <%= f.text_area :description, class: "form-control" %>
+      <%= errors_for @business_process, :description %>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Iptal</button>
+    <%= f.button class: "btn btn-primary" do %>
+      <span class="show-when-enabled">Kaydet</span>
+      <span class="show-when-disabled"><%= btn_disabled_animation %></span>
+    <% end %>
+  </div>
+
+<% end %>

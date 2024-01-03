@@ -1,0 +1,33 @@
+<%= content_tag :tr, id: dom_id(performance_indicator) do %>
+  <td><%= performance_indicator.try(:id) %></td>
+  <td><%= performance_indicator.try(:name) %></td>
+  <td><%= performance_indicator.try(:description) %></td>
+  <td>
+    <% case (performance_indicator.indicator_status)
+       when "happened" %>
+      <span class="badge text-bg-success">Gerçekleşti</span>
+    <% when "nothappened" %>
+      <span class="badge text-bg-warning">Henüz Ölçülmedi</span>
+    <% when "notmeasured" %>
+      <span class="badge text-bg-danger">Gerçekleşmedi</span>
+    <% else %>
+      <span class="badge text-bg-info"><%= performance_indicator.indicator_status %></span>
+    <% end %>
+  </td>
+  <td class="text-end">
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+      <%= link_to "<i class='bi bi-eye'></i>".html_safe, performance_indicator_path(performance_indicator),
+                  class: "btn btn-outline-secondary"
+      %>
+      <%= link_to "<i class='bi bi-pencil'></i>".html_safe, edit_performance_indicator_path(performance_indicator),
+                  class: "btn btn-outline-secondary",
+                  format: :turbo_stream,
+                  data: { turbo_frame: "modal1" }
+      %>
+      <%= link_to "<i class='bi bi-trash'></i>".html_safe, performance_indicator_path(performance_indicator),
+                  class: "btn btn-outline-secondary",
+                  data: { turbo_method: :delete, turbo_confirm: "#{performance_indicator.try(:name)} will be deleted !!!" }
+      %>
+    </div>
+  </td>
+<% end %>
